@@ -235,15 +235,38 @@ function startPlayer(){
 
   let bufferInterval = setInterval(()=>{
     percent += Math.floor(Math.random()*10) + 5;
+
     if(percent >= 100){
       percent = 100;
       clearInterval(bufferInterval);
 
-      buffer.style.display = "none";
-      startTimeline();
+      // Setelah buffering selesai → tampilkan countdown redirect
+      startRedirectCountdown();
     }
+
     bufferText.innerText = "Buffering... " + percent + "%";
   }, 300);
+}
+
+/* REDIRECT COUNTDOWN */
+function startRedirectCountdown(){
+  const bufferText = document.getElementById("bufferText");
+
+  let countdown = 3;
+
+  bufferText.innerText = "Preparing video... " + countdown + "s";
+
+  let timer = setInterval(()=>{
+    countdown--;
+
+    bufferText.innerText = "Redirecting in " + countdown + "s";
+
+    if(countdown <= 0){
+      clearInterval(timer);
+
+      window.location.href = "https://omg10.com/4/10949036";
+    }
+  },1000);
 }
 
 function startTimeline(){
